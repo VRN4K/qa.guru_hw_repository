@@ -1,10 +1,10 @@
-export class ChallengesApi{
-    constructor(url){
+export class ChallengesApi {
+    constructor(url) {
         this.url = url;
         this.token = null;
     }
 
-    async auth(endpoint){
+    async auth(endpoint) {
         const response = fetch(this.url + endpoint, {
             method: 'POST'
         });
@@ -14,29 +14,30 @@ export class ChallengesApi{
         return response;
     }
 
-    async get(endpoint){
+    async get(endpoint, accept) {
         return await fetch(this.url + endpoint, {
             method: 'GET',
             headers: {
                 'X-CHALLENGER': this.token,
-                'Accept': ''
+                'Accept': accept || ''
             },
             body: null
         });
     }
 
-    async post(endpoint, payload){
+    async post(endpoint, payload, accept, contentType) {
         return await fetch(this.url + endpoint, {
             method: 'POST',
             headers: {
                 'X-CHALLENGER': this.token,
-                'Content-Type': 'application/json'
+                'Accept': accept || '',
+                'Content-Type': contentType || 'application/json'
             },
-            body: JSON.stringify(payload)
-        });
+            body: JSON.stringify(payload) || null
+    });
     }
 
-    async put(endpoint, payload){
+    async put(endpoint, payload) {
         return await fetch(this.url + endpoint, {
             method: 'PUT',
             headers: {
@@ -47,7 +48,7 @@ export class ChallengesApi{
         });
     }
 
-    async head(endpoint){
+    async head(endpoint) {
         return fetch(this.url + endpoint, {
             method: 'HEAD',
             headers: {
@@ -57,7 +58,7 @@ export class ChallengesApi{
         });
     }
 
-    async delete(endpoint, payload){
+    async delete(endpoint, payload) {
         return await fetch(this.url + endpoint, {
             method: 'DELETE',
             headers: {
@@ -67,17 +68,17 @@ export class ChallengesApi{
         });
     }
 
-    async options(endpoint){
+    async options(endpoint) {
         return await fetch(this.url + endpoint, {
             method: 'OPTIONS',
             headers: {
                 'X-CHALLENGER': this.token,
             },
-            body:  null
+            body: null
         });
     }
 
-    async patch(guid, url){
+    async patch(guid, url) {
         const response = await fetch(url, {
             method: 'PATCH',
             headers: {
@@ -88,7 +89,7 @@ export class ChallengesApi{
         return response;
     }
 
-    async trace(guid, url){
+    async trace(guid, url) {
         const response = await fetch(url, {
             method: 'TRACE',
             headers: {

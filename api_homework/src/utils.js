@@ -1,3 +1,4 @@
+import {faker} from "@faker-js/faker";
 
 export function getRandomNumber(array) {
     const index = Math.floor(Math.random() * array.length);

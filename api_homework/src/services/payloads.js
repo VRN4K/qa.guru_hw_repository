@@ -5,6 +5,8 @@ export default {
             "doneStatus": Boolean(doneStatus),
             "description": `${description}`
         }
+    },newToDoPayloadXml: (title, doneStatus, description) => {
+        return `<doneStatus>${doneStatus}</doneStatus><description>${description}</description><title>${title}</title>`
     },
     wrongToDoStatusPayload: (title, doneStatus, description) => {
         return {
