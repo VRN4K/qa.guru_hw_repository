@@ -10,7 +10,6 @@ export class ChallengesApi {
         });
 
         this.token = (await response).headers.get('x-challenger')
-        console.log(this.token)
         return response;
     }
 
@@ -77,27 +76,4 @@ export class ChallengesApi {
             body: null
         });
     }
-
-    async patch(guid, url) {
-        const response = await fetch(url, {
-            method: 'PATCH',
-            headers: {
-                'X-CHALLENGER': guid,
-            },
-            body: null
-        })
-        return response;
-    }
-
-    async trace(guid, url) {
-        const response = await fetch(url, {
-            method: 'TRACE',
-            headers: {
-                'X-CHALLENGER': guid,
-            },
-            body: null
-        })
-        return response;
-    }
-
 }
