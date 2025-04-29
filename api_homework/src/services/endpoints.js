@@ -5,7 +5,7 @@ export default {
     getToDoNotPlural: "todo",
     getToDoById: (id) => `todos/${id}`,
     updateOrDeleteById: (id) => `todos/${id}`,
-    getFilteredTodoByDoneStatus: (doneStatus) => `todos?doneStatus=${doneStatus}`,
+    getFilteredTodoByDoneStatus: "todos?doneStatus=true",
     checkTokenExisting: (guid) => `challenger/${guid}`,
     restoreCurrentTodos: (guid) => `challenger/database/${guid}`,
 };
