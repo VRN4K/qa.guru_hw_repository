@@ -1,5 +1,4 @@
 import endpoints from "../services/endpoints";
-import payloads from "../services/payloads";
 
 export class TodosController {
     constructor(api) {
