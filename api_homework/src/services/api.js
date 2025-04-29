@@ -10,7 +10,6 @@ export class ChallengesApi {
         });
 
         this.token = (await response).headers.get('x-challenger')
-        console.log(this.token)
         return response;
     }
 

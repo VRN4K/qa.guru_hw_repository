@@ -383,7 +383,6 @@ test.describe('API challenge', () => {
             let challengerProgressPayload = await response.json();
             let newChallengerID= getRandomGUID();
             challengerProgressPayload.xChallenger = newChallengerID;
-            console.log(newChallengerID);
 
             response = await challengesController.putChallengerWithProgress(newChallengerID, challengerProgressPayload);
             expect(response.status).toBe(201);
