@@ -4,9 +4,9 @@ name: AcademyBugs test
 on:
   # стандартный запуск
   push:
-    branches: [ main, master ]
+    branches: [ main, academybugs_homework ]
   pull_request:
-    branches: [ main, master ]
+    branches: [ main, academybugs_homework ]
   # ручной запуск
   workflow_dispatch:
 
