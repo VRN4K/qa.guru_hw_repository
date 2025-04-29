@@ -1,0 +1,60 @@
+name: Playwright Tests
+on:
+  workflow_dispatch:
+  push:
+    branches: [ main, homework_pwVersion2 ]
+  pull_request:
+    branches: [ main, homework_pwVersion2 ]
+jobs:
+  test:
+    timeout-minutes: 60
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: lts/*
+      - run: npm i
+      - name: Install PW
+        run: npx playwright install --with-deps
+      - name: Run PW test
+        run: npm run test
+      - uses: actions/upload-artifact@v4
+        if: always()
+        continue-on-error: true
+        with:
+          name: test-results
+          path: test-results
+          retention-days: 20
+      - uses: actions/upload-artifact@v4
+        if: always()
+        continue-on-error: true
+        with:
+          name: allure-results
+          path: allure-results
+          retention-days: 20
+      - uses: actions/checkout@v4
+        if: always()
+        continue-on-error: true
+        with:
+        name: allure-results
+        path: allure-results
+        retention-days: 20
+
+      - name: Generate Allure Report
+        if: always()
+        uses: simple-elf/allure-report-action@master
+        id: allure-report
+        with:
+          allure_results: allure-results
+          allure_report: allure-report
+          allure_history: allure-history
+          keep_reports: 20
+
+      - name: Deploy report to GitHub Pages
+        if: always()
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: allure-history
+          publish_branch: gh-pages
